@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+Questions
+{% endblock %}
+
+{% block content %}
+<h1>
+    Questions
+</h1>
+<hr>
+{% for question in questions %}
+    <h2><a href="{% url 'question_detail' question.pk %}">{{ question.title }}</a></h2>
+    <p>{{ question.body }}</p>
+    <small class="text-muted">Asked on {{ question.date_asked }}</small>
+{% endfor %}
+{% endblock %}

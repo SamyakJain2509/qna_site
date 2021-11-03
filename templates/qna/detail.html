@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ question.title }}
+{% endblock %}
+
+{% block content %}
+<p>
+    <h1>
+        {{ question.title }}
+    </h1>
+    <p>
+        {{ question.body }}
+    </p>
+    <small class="text-muted">Asked by {{ question.asker }} on {{ question.date_asked }}</small>
+</p>
+<hr>
+<p>
+    {% with answers.count as total_answers %}
+        <h3>{{ total_answers }} Answers to this question</h3>
+    {% endwith %}
+    <hr>
+    {% for answer in answers %}
+        <small class="text-muted">Answered by {{ answer.answerer }} on {{ answer.date_answered }}</small>
+        <p>
+            {{ answer.body }}
+        </p>
+    {% endfor %}
+    <hr>
+</p>
+<p>
+    <h3>Answer this question</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-outline-primary btn-sm">Answer</button>
+    </form>
+</p>
+{% endblock %}
